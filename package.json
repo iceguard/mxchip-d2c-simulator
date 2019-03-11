@@ -1,0 +1,18 @@
+{
+  "name": "mxchip-d2c-simulator",
+  "version": "1.0.0",
+  "description": "Simulated device for device-to-cloud messaging",
+  "main": "SimulatedDevice.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iceguard/mxchip-d2c-simulator.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "azure-iot-device": "^1.7.1",
+    "azure-iot-device-mqtt": "^1.7.1"
+  }
+}
