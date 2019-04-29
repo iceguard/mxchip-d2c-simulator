@@ -25,18 +25,31 @@ var Message = require('azure-iot-device').Message;
 
 var client = DeviceClient.fromConnectionString(connectionString, Mqtt);
 
+let messageId = 1;
+
+function rand(x, y) {
+    return (x + (Math.random() * y)).toPrecision(4);
+}
+
 // Create a message and send it to the IoT hub every second
 setInterval(function(){
   // Simulate telemetry.
-  var temperature = 20 + (Math.random() * 15);
   var message = new Message(JSON.stringify({
-    temperature: temperature,
-    humidity: 60 + (Math.random() * 20)
+      devId: "simulator-1",
+      msgId: messageId++,
+      temp: rand(20, 15),
+      hum: rand(60, 20),
+      accX: rand(10, 20),
+      accY: rand(10, 20),
+      accZ: rand(10, 20),
+      gyroX: rand(10, 20),
+      gyroY: rand(100, 20),
+      gyroZ: rand(1000, 20),
   }));
 
   // Add a custom application property to the message.
   // An IoT hub can filter on these properties without access to the message body.
-  message.properties.add('temperatureAlert', (temperature > 30) ? 'true' : 'false');
+  message.properties.add('temperatureAlert', (message.temp > 30) ? 'true' : 'false');
 
   console.log('Sending message: ' + message.getData());
 
@@ -48,4 +61,4 @@ setInterval(function(){
       console.log('message sent');
     }
   });
-}, 1000);
+}, 10000);
