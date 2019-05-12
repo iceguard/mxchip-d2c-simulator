@@ -31,14 +31,18 @@ function rand(x, y) {
     return (x + (Math.random() * y)).toPrecision(4);
 }
 
+let steps = 0;
+
 // Create a message and send it to the IoT hub every second
 setInterval(function(){
   // Simulate telemetry.
+  steps += 100;
   var message = new Message(JSON.stringify({
       devId: "simulator-1",
       msgId: messageId++,
       temp: rand(20, 15),
       hum: rand(60, 20),
+      step: steps,
       accX: rand(10, 20),
       accY: rand(10, 20),
       accZ: rand(10, 20),
